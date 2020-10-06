@@ -1,0 +1,29 @@
+{
+  "name": "kai-membership-portal",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt-ts build",
+    "start": "nuxt-ts start",
+    "export": "nuxt-ts export",
+    "serve": "nuxt-ts serve",
+    "clear": "rm -rf .nuxt",
+    "generate": "nuxt-ts generate"
+  },
+  "dependencies": {
+    "@nuxt/typescript-runtime": "^0.4.10",
+    "@nuxtjs/auth": "^4.9.1",
+    "@nuxtjs/axios": "^5.11.0",
+    "moment": "^2.27.0",
+    "nuxt": "^2.13.0",
+    "sweetalert2": "^9.17.1"
+  },
+  "devDependencies": {
+    "@nuxt/typescript-build": "^1.0.3",
+    "@nuxtjs/vuetify": "^1.11.2",
+    "@types/nuxtjs__auth": "^4.8.4",
+    "nuxt-class-component": "^1.3.0",
+    "nuxt-property-decorator": "^2.7.2"
+  }
+}

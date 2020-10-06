@@ -1,0 +1,22 @@
+@font-face {
+  font-family: SFProText;
+  src: url(~assets/fonts/SFProText-Regular.ttf);
+}
+* {
+  color: #595a5c;
+  line-height: 20px;
+  font-family: SFProText;
+}
+html,
+body {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+a.v-tab.v-tab--active {
+  color: #ffffff;
+  text-decoration: underline;
+}
+.mx-auto {
+  margin-right: auto;
+  margin-left: auto;
+}
