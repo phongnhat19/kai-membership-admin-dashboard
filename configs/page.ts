@@ -6,8 +6,13 @@ export type TabItem = {
 
 // Customer
 export const CustomerTabItems: TabItem[] = [
-  { id: 'customer-list', title: 'Danh sách', component: 'CustomerList' },
-  { id: 'edit-customer', title: 'Chỉnh sửa', component: 'EditCustomer' },
+  { id: 'customer-list', title: 'List', component: 'CustomerList' },
+  { id: 'edit-customer', title: 'Edit', component: 'EditCustomer' },
+]
+
+// Customer
+export const HistoryTxTabItems: TabItem[] = [
+  { id: 'history-list', title: 'List', component: 'HistoryTxList' }
 ]
 
 export default {

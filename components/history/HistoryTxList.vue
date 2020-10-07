@@ -2,7 +2,7 @@
   <v-card>
     <v-container v-if="!isLoading">
       <v-card-title>
-        Reward list
+        History transaction list
         <v-spacer></v-spacer>
 
         <v-text-field
@@ -19,12 +19,7 @@
         :headers="headers"
         :items="items"
         :search="search"
-        single-expand
-        @page-count="pageCount = $event"
       >
-        <template v-slot:expanded-item="{ headers, item }">
-          <td :colspan="headers.length">More info about {{ item.name }}</td>
-        </template>
       </v-data-table>
     </v-container>
     <v-skeleton-loader v-else class="mx-auto" type="table"></v-skeleton-loader>
@@ -33,36 +28,29 @@
 
 <script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator";
+import { HISTORY_TX_LIST_HEADERS } from "@/configs/constans";
 import { GET } from "~/utils/api";
-import { REWARD_LIST_HEADERS } from "@/configs/constans";
 
-@Component({})
-export default class EditCustomer extends Vue {
+@Component
+export default class HistoryTxList extends Vue {
   search: string = "";
   isLoading = true;
   page = 1;
-
-  headers: any[] = [];
+  headers: any[] = HISTORY_TX_LIST_HEADERS;
   items: any[] = [];
 
- 
   async fetch() {
-    const path = "rewards";
+    const path = "history";
     const config = {
       headers: {
         'Authorization': this.$auth.getToken('admin_token')
       }
     }
     let rs = await GET(path, config);
-    this.items = rs.data.data
-    
-    setTimeout(() => {
-      this.headers = REWARD_LIST_HEADERS;
-      this.isLoading = false;
-    }, 333);
+    if(rs && rs.status === 200) {
+        this.items = rs.data.data.data
+        this.isLoading = false;
+    }
   }
 }
 </script>
-
-<style lang="scss" scoped>
-</style>
