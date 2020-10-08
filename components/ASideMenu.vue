@@ -45,15 +45,15 @@
 
 <script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator";
-import { MenuItems } from "@/utils/constans";
+import { MenuItems } from "@/configs/constans";
 
 @Component
 export default class ASideMenu extends Vue {
   drawer = true;
   items = MenuItems;
 
-  logOut() {
-    this.$auth.logout();
+  async logOut() {
+    await this.$auth.logout();
   }
 }
 </script>

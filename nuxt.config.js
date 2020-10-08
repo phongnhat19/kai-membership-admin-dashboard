@@ -1,4 +1,3 @@
-const SERVER_URL = 'https://dev-api-tego022.bcms.tech/';
 
 module.exports = {
   server: {
@@ -32,38 +31,46 @@ module.exports = {
     "@nuxtjs/vuetify",
   ],
   customVariables: ['~/assets/variables.scss'],
-  modules: ["@nuxtjs/axios", "@nuxtjs/auth"],
+  modules: ["@nuxtjs/axios", "@nuxtjs/auth", "@nuxtjs/toast"],
+  toast: {
+    position: 'top-right',
+    register: [ // Register custom toasts
+      {
+        name: 'my-error',
+        message: 'Oops...Something went wrong',
+        options: {
+          type: 'error'
+        }
+      }
+    ]
+  },
   auth: {
     strategies: {
       local: {
         endpoints: {
           login: {
-            url: "public/login",
+            url: "auth/login/admin",
             method: "post",
-            propertyName: 'data.token'
-          },
-          user: {
-            url: "secure/users/info",
-            method: "get",
             propertyName: 'data'
           },
-          logout: false,
+          user: false,
+          logout: false
         },
       },
     },
     redirect: {
       login: '/login',
       logout: '/login',
-      callback: false,
+      callback: '/login', 
       home: '/'
     }
   },
   axios: {
-    baseURL: `${SERVER_URL}api/v1/`,
+    baseURL: process.env.SERVER_URL,
     proxyHeaders: false,
     credentials: false
   },
   env: {
-    BASE_URL: SERVER_URL
+    BASE_URL: process.env.SERVER_URL
   }
 };

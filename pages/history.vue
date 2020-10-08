@@ -12,17 +12,17 @@
 
 <script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator";
-import { CustomerTabItems } from "@/configs/page";
+import { HistoryTxTabItems } from "@/configs/page";
 
 // Lazy load components
-const RewardList = () => import("@/components/reward/RewardList.vue");
+const HistoryTxList = () => import("@/components/history/HistoryTxList.vue");
 
 @Component({
   layout: "default",
-  components: { RewardList },
+  components: { HistoryTxList },
 })
 export default class Home extends Vue {
-  tabItems = CustomerTabItems;
+  tabItems = HistoryTxTabItems;
 }
 </script>
 

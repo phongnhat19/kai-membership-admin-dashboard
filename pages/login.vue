@@ -1,19 +1,32 @@
 <template>
   <v-row class="pt-5">
     <v-col class="mx-auto" cols="10" sm="6" md="4" lg="4">
-      <Logo class="mx-auto" />
+      <v-list-item>
+        <img class="kai_logo" src="/icon.png">
+        <v-list-item-content>
+          <v-list-item-title>KAI MEMBERSHIP</v-list-item-title>
+          <v-list-item-subtitle>Admin portal</v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
 
-      <v-form class="p-3" ref="form" v-model="valid" :lazy-validation="true">
+      <v-form class="p-3" ref="form" v-model="valid" lazy-validation>
         <v-text-field
-          v-model="phone"
-          :counter="10"
-          :rules="phoneRules"
-          label="Số điện thoại"
+          v-model="userName"
+          counter
+          :rules="userNameRules"
+          label="Username"
           required
         ></v-text-field>
-
-        <v-text-field v-model="password" :rules="pwdRules" label="Mật khẩu" required></v-text-field>
-
+        <v-text-field
+            v-model="password"
+            :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+            :rules="pwdRules"
+            :type="show ? 'text' : 'password'"
+            label="Password"
+            counter
+            @click:append="show = !show"
+        ></v-text-field>
+        <div v-if="showError" class="error-meesage">User name or password invalid</div>
         <v-btn block @click="logIn">Login</v-btn>
       </v-form>
     </v-col>
@@ -22,34 +35,61 @@
 
 <script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator";
+import { $axios } from "~/utils/api";
 
 @Component({
   layout: "no-aside-menu",
 })
+
 export default class Login extends Vue {
   valid = false;
-
-  phone = "";
+  show = false;
+  userName = "";
   password = "";
+  showError = false;
 
-  get phoneRules() {
-    return [];
+  get userNameRules() {
+    return [
+      (v: any) => !!v || 'Field is required'
+    ];
   }
 
   get pwdRules() {
-    return [];
+    return [
+       (v: any) => !!v || 'Field is required'
+    ];
   }
 
-  logIn() {
-    this.$auth.setUser({
-      username: "admin"
-    });
+  async logIn() {
+    if(!(this.$refs.form as Vue & { validate: () => boolean }).validate()) {
+      return 
+    }
+    try {
+      let response = await this.$auth.loginWith('local', {
+        data: {
+          username: this.userName,
+          password: this.password
+        },
+      });
+      this.showError = false;
+    } catch (error) {
+      console.log("Error");
+      this.showError = true;
+      return
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.logo {
-  height: 170px;
-}
+  .kai_logo {
+    height: 200px;
+  }
+  .error-meesage {
+    font-size: 14px;
+    color: red;
+    font-weight: 200;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
 </style>
