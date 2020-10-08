@@ -26,7 +26,7 @@
             counter
             @click:append="show = !show"
         ></v-text-field>
-
+        <div v-if="showError" class="error-meesage">User name or password invalid</div>
         <v-btn block @click="logIn">Login</v-btn>
       </v-form>
     </v-col>
@@ -46,6 +46,7 @@ export default class Login extends Vue {
   show = false;
   userName = "";
   password = "";
+  showError = false;
 
   get userNameRules() {
     return [
@@ -60,12 +61,22 @@ export default class Login extends Vue {
   }
 
   async logIn() {
-    let response = await this.$auth.loginWith('local', {
-      data: {
-        username: this.userName,
-        password: this.password
-      },
-    });
+    if(!(this.$refs.form as Vue & { validate: () => boolean }).validate()) {
+      return 
+    }
+    try {
+      let response = await this.$auth.loginWith('local', {
+        data: {
+          username: this.userName,
+          password: this.password
+        },
+      });
+      this.showError = false;
+    } catch (error) {
+      console.log("Error");
+      this.showError = true;
+      return
+    }
   }
 }
 </script>
@@ -73,5 +84,12 @@ export default class Login extends Vue {
 <style lang="scss" scoped>
   .kai_logo {
     height: 200px;
+  }
+  .error-meesage {
+    font-size: 14px;
+    color: red;
+    font-weight: 200;
+    font-style: italic;
+    margin-bottom: 20px;
   }
 </style>

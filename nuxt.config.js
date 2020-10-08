@@ -31,7 +31,19 @@ module.exports = {
     "@nuxtjs/vuetify",
   ],
   customVariables: ['~/assets/variables.scss'],
-  modules: ["@nuxtjs/axios", "@nuxtjs/auth"],
+  modules: ["@nuxtjs/axios", "@nuxtjs/auth", "@nuxtjs/toast"],
+  toast: {
+    position: 'top-right',
+    register: [ // Register custom toasts
+      {
+        name: 'my-error',
+        message: 'Oops...Something went wrong',
+        options: {
+          type: 'error'
+        }
+      }
+    ]
+  },
   auth: {
     strategies: {
       local: {

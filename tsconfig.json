@@ -29,7 +29,8 @@
       "@nuxtjs/axios",
       "@types/nuxtjs__auth",
       "@nuxtjs/vuetify",
-      "@nuxt/vue-app"
+      "@nuxt/vue-app",
+      "@nuxtjs/toast",
     ]
   },
   "exclude": [
