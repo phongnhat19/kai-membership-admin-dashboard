@@ -20,6 +20,17 @@
         :items="items"
         :search="search"
       >
+        <template v-slot:[`item.active`]="{ item }">
+          <v-chip
+            :color="item.active == true ? 'green' : 'red'"
+            outlined
+            class="ma-2"
+            text-color="white"
+            style="width: 60px; text-align: center"
+          >
+            {{ item.active }}
+          </v-chip>
+        </template>
       </v-data-table>
     </v-container>
     <v-skeleton-loader v-else class="mx-auto" type="table"></v-skeleton-loader>

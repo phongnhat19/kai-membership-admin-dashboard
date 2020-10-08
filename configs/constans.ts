@@ -9,11 +9,11 @@ export const MenuItems = [
 		to: '/history',
 		icon: ''
 	},
-	{
-		title: 'Setting',
-		to: '/setting', 
-		icon: 'mdi-wrench'
-	}
+	// {
+	// 	title: 'Setting',
+	// 	to: '/setting', 
+	// 	icon: 'mdi-wrench'
+	// }
 ]
 
 export type MenuItem = {
@@ -29,6 +29,7 @@ export const HISTORY_TX_LIST_HEADERS = [
 	{ text: "Email", value: "email" },
 	{ text: "Reward name", value: "rewardName" },
 	{ text: "Status", value: "status" },
+	{ text: 'Actions', value: 'actions', sortable: false },
 ];
 
 export const REWARD_LIST_HEADERS = [
