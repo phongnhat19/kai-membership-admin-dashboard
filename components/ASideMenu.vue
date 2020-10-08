@@ -52,8 +52,8 @@ export default class ASideMenu extends Vue {
   drawer = true;
   items = MenuItems;
 
-  logOut() {
-    this.$auth.logout();
+  async logOut() {
+    await this.$auth.logout();
   }
 }
 </script>

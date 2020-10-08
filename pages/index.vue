@@ -15,12 +15,11 @@ import { Vue, Component } from "nuxt-property-decorator";
 import { CustomerTabItems } from "@/configs/page";
 
 // Lazy load components
-const CustomerList = () => import("@/components/customer/CustomerList.vue");
-const EditCustomer = () => import("@/components/customer/EditCustomer.vue");
+const RewardList = () => import("@/components/reward/RewardList.vue");
 
 @Component({
   layout: "default",
-  components: { EditCustomer, CustomerList },
+  components: { RewardList },
 })
 export default class Home extends Vue {
   tabItems = CustomerTabItems;

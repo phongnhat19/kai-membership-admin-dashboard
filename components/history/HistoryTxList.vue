@@ -29,7 +29,7 @@
 <script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator";
 import { HISTORY_TX_LIST_HEADERS } from "@/configs/constans";
-import { GET } from "~/utils/api";
+import { $axios } from "~/utils/api";
 
 @Component
 export default class HistoryTxList extends Vue {
@@ -45,8 +45,8 @@ export default class HistoryTxList extends Vue {
       headers: {
         'Authorization': this.$auth.getToken('admin_token')
       }
-    }
-    let rs = await GET(path, config);
+    };
+    let rs = await this.$axios.get(path, config);
     if(rs && rs.status === 200) {
         this.items = rs.data.data.data
         this.isLoading = false;

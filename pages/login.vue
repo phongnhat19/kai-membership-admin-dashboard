@@ -35,7 +35,7 @@
 
 <script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator";
-import { $axios, POST } from "~/utils/api";
+import { $axios } from "~/utils/api";
 
 @Component({
   layout: "no-aside-menu",
@@ -60,20 +60,12 @@ export default class Login extends Vue {
   }
 
   async logIn() {
-    let url = "auth/login/admin";
-    let data = {
-      username: this.userName,
-      password: this.password
-    }
-    let rs = await POST(url, data)
-    if(rs && rs.status === 200 && rs.data) {
-      let token = `Bearer ${rs.data.data}`;
-      this.$auth.setUser({
+    let response = await this.$auth.loginWith('local', {
+      data: {
         username: this.userName,
-      });
-      this.$auth.setToken('admin_token', token);
-      // await this.$auth.login(token)
-    }
+        password: this.password
+      },
+    });
   }
 }
 </script>
