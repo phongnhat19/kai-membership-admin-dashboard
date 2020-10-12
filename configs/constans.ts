@@ -23,7 +23,7 @@ export type MenuItem = {
 }
 
 export const HISTORY_TX_LIST_HEADERS = [
-	{ text: "User name", value: "username" },
+	{ text: "Username", value: "username" },
 	{ text: "Full name", value: "fullName" },
 	{ text: "Phone", value: "phone" },
 	{ text: "Email", value: "email" },
@@ -40,3 +40,5 @@ export const REWARD_LIST_HEADERS = [
 	{ text: "Image", value: "image" },
 	{ text: "Active", value: "active" },
 ];
+
+export const DEFAULT_STRATEGY = 'local'
