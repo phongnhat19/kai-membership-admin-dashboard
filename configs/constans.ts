@@ -2,12 +2,12 @@ export const MenuItems = [
 	{
 		title: 'Reward list',
 		to: '/',
-		icon: ''
+		icon: 'mdi-gift-outline'
 	},
 	{
-		title: 'History list',
+		title: 'Reward history',
 		to: '/history',
-		icon: ''
+		icon: 'mdi-cash-usd-outline'
 	},
 	// {
 	// 	title: 'Setting',
