@@ -33,16 +33,17 @@ module.exports = {
   customVariables: ['~/assets/variables.scss'],
   modules: ["@nuxtjs/axios", "@nuxtjs/auth", "@nuxtjs/toast"],
   toast: {
-    position: 'top-right',
-    register: [ // Register custom toasts
-      {
-        name: 'my-error',
-        message: 'Oops...Something went wrong',
-        options: {
-          type: 'error'
-        }
+    position: 'bottom-right',
+    duration: 3000,
+    iconPack: 'mdi',
+    singleton: true,
+    className: 'kms-toast-container',
+    action: {
+      icon : 'close-thick',
+      onClick : (e, toastObject) => {
+        toastObject.goAway(0);
       }
-    ]
+  }
   },
   auth: {
     strategies: {
