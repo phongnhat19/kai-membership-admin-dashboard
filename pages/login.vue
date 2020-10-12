@@ -35,6 +35,7 @@
 
 <script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator";
+import { DEFAULT_STRATEGY } from "~/configs/constans";
 import { $axios } from "~/utils/api";
 
 @Component({
@@ -65,7 +66,7 @@ export default class Login extends Vue {
       return 
     }
     try {
-      let response = await this.$auth.loginWith('local', {
+      let response = await this.$auth.loginWith(DEFAULT_STRATEGY, {
         data: {
           username: this.userName,
           password: this.password
