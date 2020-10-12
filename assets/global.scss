@@ -3,7 +3,7 @@
   src: url(~assets/fonts/SFProText-Regular.ttf);
 }
 * {
-  color: #595a5c;
+  // color: #595a5c;
   line-height: 20px;
   font-family: SFProText;
 }
@@ -19,4 +19,8 @@ a.v-tab.v-tab--active {
 .mx-auto {
   margin-right: auto;
   margin-left: auto;
+}
+
+.kms-toast-container>a {
+  color: #FFFFFF !important;
 }

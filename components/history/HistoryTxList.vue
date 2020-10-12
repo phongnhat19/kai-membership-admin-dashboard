@@ -2,7 +2,7 @@
   <v-card>
     <v-container v-if="!isLoading">
       <v-card-title>
-        History transaction list
+        Reward history
         <v-spacer></v-spacer>
 
         <v-text-field
@@ -22,12 +22,11 @@
       >
         <template v-slot:[`item.status`]="{ item }">
           <v-chip
-            :color="item.status == true ? 'green' : 'red'"
+            :color="item.status == true ? 'green' : 'orange'"
             outlined
-            class="ma-2"
-            style="width: 60px; text-align: center"
+            class="ma-2 history-status"
           >
-            {{ item.status }}
+            {{ item.status ? 'COMPLETED' : 'PENDING' }}
           </v-chip>
         </template>
 
@@ -49,8 +48,9 @@
 
 <script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator";
-import { HISTORY_TX_LIST_HEADERS } from "@/configs/constans";
+import { DEFAULT_STRATEGY, HISTORY_TX_LIST_HEADERS } from "@/configs/constans";
 import { $axios } from "~/utils/api";
+import './history.css'
 
 @Component
 export default class HistoryTxList extends Vue {
@@ -67,11 +67,14 @@ export default class HistoryTxList extends Vue {
 
     const config = {
       headers: {
-        'Authorization': this.$auth.getToken('admin_token')
+        'Authorization': this.$auth.getToken(DEFAULT_STRATEGY)
       }
     };
     let rs = await this.$axios.put(`history/${item['_id']}`,null,  config)
     if(rs && rs.status === 200) {
+      console.log('here')
+      console.log(this.$toast)
+      this.$toast.success('Status updated successfully')
       this.loadHistoryTxList();
     } 
     
@@ -80,7 +83,7 @@ export default class HistoryTxList extends Vue {
   async loadHistoryTxList() {
     const config = {
       headers: {
-        'Authorization': this.$auth.getToken('admin_token')
+        'Authorization': this.$auth.getToken(DEFAULT_STRATEGY)
       }
     };
     let rs = await this.$axios.get("history", config);

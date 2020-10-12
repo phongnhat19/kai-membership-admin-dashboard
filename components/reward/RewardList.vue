@@ -23,12 +23,10 @@
         <template v-slot:[`item.active`]="{ item }">
           <v-chip
             :color="item.active == true ? 'green' : 'red'"
-            outlined
-            class="ma-2"
+            class="ma-2 reward-status"
             text-color="white"
-            style="width: 60px; text-align: center"
           >
-            {{ item.active }}
+            {{ item.active ? 'ACTIVE' : 'INACTIVE' }}
           </v-chip>
         </template>
       </v-data-table>
@@ -39,7 +37,8 @@
 
 <script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator";
-import { REWARD_LIST_HEADERS } from "@/configs/constans";
+import { DEFAULT_STRATEGY, REWARD_LIST_HEADERS } from "@/configs/constans";
+import './reward.css';
 import { $axios } from "~/utils/api";
 
 @Component
@@ -55,7 +54,7 @@ export default class RewardList extends Vue {
     const path = "rewards";
     const config = {
       headers: {
-        'Authorization': this.$auth.getToken('admin_token')
+        'Authorization': this.$auth.getToken(DEFAULT_STRATEGY)
       }
     }
     let rs = await this.$axios.get(path, config);

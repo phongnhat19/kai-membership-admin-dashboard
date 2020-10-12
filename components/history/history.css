@@ -1,0 +1,7 @@
+.history-status {
+    width: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
